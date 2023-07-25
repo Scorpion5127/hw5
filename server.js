@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
-const connectionString = "mongodb+srv://itsame3000:TFKxWjh2zqF7aZaw@cluster0.bmudppa.mongodb.net/?retryWrites=true&w=majority";
-
+const connectionString = "mongodb://itsame3000:TFKxWjh2zqF7aZaw@ac-oymu4c5-shard-00-00.bmudppa.mongodb.net:27017,ac-oymu4c5-shard-00-01.bmudppa.mongodb.net:27017,ac-oymu4c5-shard-00-02.bmudppa.mongodb.net:27017/?ssl=true&replicaSet=atlas-ip6mca-shard-0&authSource=admin&retryWrites=true&w=majority";
+//TFKxWjh2zqF7aZaw
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then(client => {
     console.log('Connected to Database');
@@ -55,6 +55,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         })
         .catch(error => console.error(error));
     });
+    
     app.delete('/quotes', (req, res) => {
       quotesCollection
         .deleteOne({ name: req.body.name })
@@ -66,6 +67,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         })
         .catch(error => console.error(error))
     })
+
+
+
     const port = process.env.PORT || 3000;
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
