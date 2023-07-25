@@ -8,34 +8,37 @@
       font-family: Arial, sans-serif;
       margin: 20px;
       padding: 0;
-      display: flex;
     }
-    .left-section {
-      flex: 1;
-      margin-right: 20px;
-      border-right: 1px solid #ccc; /* Add border to separate sections */
-      padding-right: 20px; /* Add some spacing */
+
+    /* Use grid layout for the container */
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      background-color: #f2f2f2; /* Grey background color */
+      padding: 20px;
     }
-    .right-section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+
+    /* Style for each grid item */
+    .item {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: white;
     }
-    .section-container {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #ccc; /* Add border to separate sections */
-      padding-bottom: 20px; /* Add some spacing */
-      margin-bottom: 20px; /* Add some spacing */
-    }
+
     h1 {
       color: #003366;
     }
     form {
+      /* Removed max-width to make it span the column */
       display: flex;
       flex-direction: column;
-      max-width: 400px;
       margin-bottom: 20px;
+      padding: 20px; /* Add padding for the form */
+      border: 1px solid #ccc; /* Add border for the form */
+      border-radius: 5px; /* Add border-radius for rounded corners */
+      background-color: #f9f9f9; /* Background color for the form */
     }
     input {
       padding: 8px;
@@ -58,6 +61,7 @@
     }
     .quotes {
       list-style: none;
+      background-color: white; /* Grey background color */
       padding: 0;
     }
     .quote {
@@ -77,19 +81,49 @@
       margin-top: 10px;
       color: #cc0000;
     }
+
+    /* Style for the new-div */
+    #new-div {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f2f2f2; /* Grey background color */
+      margin-top: 20px; /* Add margin to separate from the first row */
+    }
   </style>
 </head>
 
 <body>
-  <div class="left-section">
-    <h1>May Node and Express be with you.</h1>
+  <h1>May Node and Express be with you.</h1>
 
-    <form action="/quotes" method="POST">
-      <input type="text" placeholder="Name" name="name" />
-      <input type="text" placeholder="Quote" name="quote" />
-      <button type="submit">Submit</button>
-    </form>
+  <div class="container">
+    <!-- Form -->
+    <div class="item">
+      <form action="/quotes" method="POST">
+        <input type="text" placeholder="Name" name="name" />
+        <input type="text" placeholder="Quote" name="quote" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
 
+    <!-- Darth Vader invades! -->
+    <div class="item" id="invades">
+      <h2>Darth Vader invades!</h2>
+      <p>Replace the first Yoda's quote with a quote written by Darth Vader</p>
+      <button id="update-button">Replace Yoda's quote</button>
+    </div>
+
+    <!-- Remove Darth Vader! -->
+    <div class="item" id="remove">
+      <h2>Remove Darth Vader!</h2>
+      <p>Delete one Darth Vader's quote. Does nothing if there are no more Darth Vader's quotes.</p>
+      <button id="delete-button">Delete Darth Vader's quote</button>
+      <div id="message"></div>
+    </div>
+  </div>
+
+  <!-- Quotes -->
+  <div id="new-div"> <!-- This div is outside the grid layout -->
     <h2>Quotes</h2>
     <ul class="quotes">
       <!-- Loop through quotes -->
@@ -102,23 +136,6 @@
       </li>
       <% } %>
     </ul>
-  </div>
-
-  <div class="right-section">
-    <div class="section-container">
-      <div id="invades">
-        <h2>Darth Vader invades!</h2>
-        <p>Replace the first Yoda's quote with a quote written by Darth Vader</p>
-        <button id="update-button">Replace Yoda's quote</button>
-      </div>
-
-      <div id="remove">
-        <h2>Remove Darth Vader!</h2>
-        <p>Delete one Darth Vader's quote. Does nothing if there are no more Darth Vader's quotes.</p>
-        <button id="delete-button">Delete Darth Vader's quote</button>
-        <div id="message"></div>
-      </div>
-    </div>
   </div>
 
   <script src="/main.js"></script>
